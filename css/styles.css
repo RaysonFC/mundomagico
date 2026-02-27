@@ -1,0 +1,46 @@
+/* RESET & BASE */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{height:100%;touch-action:manipulation}
+body{font-family:'Nunito',sans-serif;background:#0a1628;color:#fff;width:100vw;height:100dvh;overflow:hidden;position:fixed}
+
+/* DESIGN TOKENS */
+:root{
+  --night1:#0a1628;--gold:#ffd700;--card:#0f2044;--border:rgba(255,255,255,0.12);
+  --fh:'Boogaloo',cursive;--r:20px;
+}
+
+/* ANIMAÇÕES BASE */
+@keyframes twinkle{0%,100%{opacity:.2;transform:scale(.8)}50%{opacity:1;transform:scale(1.4)}}
+@keyframes moonFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+/* UNIVERSE */
+#universe{position:fixed;inset:0}
+.star{position:absolute;border-radius:50%;background:#fff;animation:twinkle 3s infinite}
+.tree-row{position:absolute;bottom:0;left:0;right:0;height:25vh;background:radial-gradient(ellipse 80px 150px at 10% 100%,#0a2215 50%,transparent 51%),radial-gradient(ellipse 70px 140px at 30% 100%,#0a2215 50%,transparent 51%),radial-gradient(ellipse 90px 170px at 60% 100%,#0a2215 50%,transparent 51%),radial-gradient(ellipse 60px 120px at 85% 100%,#0a2215 50%,transparent 51%);opacity:.9}
+
+/* SCREENS */
+.screen{position:fixed;inset:0;display:none;flex-direction:column;align-items:center;overflow:hidden}
+.screen.on{display:flex}
+
+/* GAME CARDS */
+.game-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;width:100%;padding:0 20px}
+.game-card{background:var(--card);border:2px solid var(--border);border-radius:var(--r);padding:20px 16px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;transition:transform .2s;box-shadow:0 8px 32px rgba(0,0,0,.4)}
+.game-card:active{transform:scale(.95)}
+.card-icon{font-size:3.5rem;line-height:1;animation:cardFloat 2.5s infinite}
+@keyframes cardFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.card-name{font-family:var(--fh);font-size:1.2rem;text-align:center}
+.card-desc{font-size:.8rem;color:rgba(255,255,255,.6)}
+.card-stars{font-size:1rem;color:var(--gold);letter-spacing:2px}
+
+/* COINS */
+.coins-row{display:flex;align-items:center;gap:8px;background:rgba(255,215,0,.1);border:2px solid rgba(255,215,0,.3);border-radius:40px;padding:12px 20px}
+
+/* LOGO */
+.logo-moon{font-size:5rem;display:block;animation:moonFloat 3s infinite;filter:drop-shadow(0 0 32px var(--gold))}
+.logo-title{font-family:var(--fh);font-size:3.8rem;line-height:1.1;background:linear-gradient(135deg,#ffe066,#ff6eb4,#00d4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.logo-stars{display:flex;justify-content:center;gap:12px;font-size:1.3rem;margin:8px 0}
+.logo-sub{font-size:1rem;color:rgba(255,255,255,.7);animation:breathe 2.5s infinite}
+@keyframes breathe{0%,100%{opacity:.6}50%{opacity:1}}
+
+/* RESPONSIVO */
+@media (max-width:480px){.game-grid{grid-template-columns:1fr}}
