@@ -1,368 +1,70 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-<meta name="theme-color" content="#0a1628"/>
-<title>🌟 Mundo Mágico v2.0</title>
-<link href="https://fonts.googleapis.com/css2?family=Boogaloo&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet"/>
-<style>
-/* OTIMIZAÇÕES DE PERFORMANCE */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;will-change:transform}
-html{height:100%;touch-action:manipulation;overscroll-behavior:none;font-size:16px}
-body{
-  font-family:'Nunito',sans-serif;background:linear-gradient(180deg,#0a1628 0%,#050e1f 100%);
-  color:#fff;width:100vw;height:100dvh;overflow:hidden;position:fixed;
-  -webkit-user-select:none;user-select:none;transition:filter .3s ease;
-}
-@media (prefers-reduced-motion:no-preference){body{animation:ambientGlow 8s ease-in-out infinite}}
-@keyframes ambientGlow{0%,100%{filter:brightness(1) contrast(1)}50%{filter:brightness(1.05) contrast(1.02)}}
-
-/* DESIGN SYSTEM ATUALIZADO */
-:root{
-  --night1:#0a1628;--night2:#0d1f3c;--night3:#112244;--night4:#050e1f;
-  --gold:#ffd700;--goldg:linear-gradient(135deg,#ffe066,#ffa500);
-  --pink:#ff6eb4;--cyan:#00d4ff;--mint:#00ffb3;--purple:#c77dff;
-  --card:#0f2044;--card2:#162855;--glass:rgba(255,255,255,0.06);
-  --border:rgba(255,255,255,0.12);--shadow:0 12px 40px rgba(0,0,0,0.5);
-  --fh:'Boogaloo',cursive;--r:20px;--r2:28px;
-  --sat:env(safe-area-inset-top);--sab:env(safe-area-inset-bottom);
-}
-
-/* AURORA + ESTRELAS OTIMIZADAS */
-#universe{position:fixed;inset:0;z-index:1;background:var(--night4)}
-.aurora{position:absolute;width:200%;height:70%;top:-15%;left:-50%;opacity:.08;
-  filter:blur(50px);will-change:transform;animation:auroraFlow 16s ease-in-out infinite}
-.aurora1{background:linear-gradient(170deg,var(--cyan),var(--purple),transparent);animation-delay:0s}
-.aurora2{background:linear-gradient(170deg,var(--pink),var(--mint),transparent);animation-delay:-8s}
-@keyframes auroraFlow{0%,100%{transform:scale(1) translateX(0)}50%{transform:scale(1.15) translateX(-10%)}}
-
-.star{position:absolute;border-radius:50%;background:#fff;will-change:transform,opacity;
-  animation:twinkle 3s ease-in-out infinite}
-@keyframes twinkle{0%,100%{opacity:.2;transform:scale(.8)}50%{opacity:1;transform:scale(1.4)}
-
-/* FORESTA RESPONSIVA */
-.tree-row{position:absolute;bottom:0;left:0;right:0;height:28dvh;background:
-  radial-gradient(ellipse 70px 140px at 3% 100%,#081c12 50%,transparent 51%),
-  radial-gradient(ellipse 90px 170px at 15% 100%,#0b2416 50%,transparent 51%),
-  radial-gradient(ellipse 65px 130px at 28% 100%,#081c12 50%,transparent 51%),
-  radial-gradient(ellipse 100px 180px at 40% 100%,#0b2416 50%,transparent 51%),
-  radial-gradient(ellipse 80px 150px at 52% 100%,#081c12 50%,transparent 51%),
-  radial-gradient(ellipse 85px 160px at 68% 100%,#0b2416 50%,transparent 51%),
-  radial-gradient(ellipse 70px 135px at 82% 100%,#081c12 50%,transparent 51%),
-  radial-gradient(ellipse 95px 175px at 94% 100%,#0b2416 50%,transparent 51%);
-  opacity:.92;pointer-events:none}
-
-/* TELAS COM TRANSITIONS SUAVES */
-.screen{position:fixed;inset:0;z-index:10;display:none;flex-direction:column;
-  align-items:center;overflow:hidden;padding:var(--sat) 0 var(--sab);opacity:0;
-  transition:opacity .4s cubic-bezier(.34,1.56,.64,1),transform .4s}
-.screen.on{display:flex;opacity:1;transform:translateZ(0)}
-
-/* MENU PRINCIPAL MELHORADO */
-.menu-scroll{display:flex;flex-direction:column;align-items:center;min-height:100%;
-  width:100%;padding:clamp(24px,6vw,32px) clamp(16px,5vw,24px);gap:20px;max-width:520px}
-
-/* LOGO COM MICRO-INTERAÇÕES */
-.logo-zone{text-align:center;position:relative;padding:12px 0;transform:translateZ(0)}
-.logo-moon{font-size:clamp(3.2rem,18vw,6rem);filter:drop-shadow(0 0 32px var(--gold))
-  drop-shadow(0 0 64px rgba(255,215,0,.5));animation:moonFloat 4s ease-in-out infinite;
-  will-change:transform,filter}
-@keyframes moonFloat{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-16px) scale(1.08)}}
-.logo-title{font-family:var(--fh);font-size:clamp(2.4rem,12vw,4.2rem);line-height:1.1;
-  background:linear-gradient(135deg,var(--gold),var(--pink),var(--purple),var(--cyan));
-  background-size:300% 300%;-webkit-background-clip:text;background-clip:text;
-  filter:drop-shadow(0 4px 16px rgba(255,215,0,.4));animation:gradientShift 6s ease infinite}
-@keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-
-.logo-stars{position:relative;display:flex;justify-content:center;gap:12px;margin:8px 0 0;
-  font-size:clamp(1.1rem,5vw,1.5rem);perspective:500px}
-.logo-stars span{display:inline-block;animation:starOrbit 3s ease-in-out infinite;
-  transform-style:preserve-3d}
-.logo-stars span:nth-child(1){--orbit:2.2s;--delay:0s}
-.logo-stars span:nth-child(2){--orbit:1.9s;--delay:-.5s}
-.logo-stars span:nth-child(3){--orbit:2.5s;--delay:-1s}
-.logo-stars span:nth-child(4){--orbit:2.1s;--delay:-1.5s}
-.logo-stars span:nth-child(5){--orbit:1.8s;--delay:-.3s}
-@keyframes starOrbit{0%,100%{transform:rotateY(0deg) translateZ(0) scale(1)}50%{transform:rotateY(180deg) translateZ(20px) scale(1.25)}}
-
-.logo-sub{font-size:clamp(0.95rem,4vw,1.2rem);color:rgba(255,255,255,.7);
-  animation:breathe 3s ease-in-out infinite;margin-top:6px}
-@keyframes breathe{0%,100%{opacity:.65;transform:scale(1)}50%{opacity:1;transform:scale(1.02)}}
-
-/* CARDS DE JOGO RECONFIGURADOS */
-.game-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;width:100%}
-.game-card{background:var(--card);border:2px solid var(--border);border-radius:var(--r2);
-  padding:clamp(18px,5vw,24px) 16px;display:flex;flex-direction:column;align-items:center;
-  gap:8px;cursor:pointer;position:relative;overflow:hidden;transition:all .2s cubic-bezier(.34,1.56,.64,1);
-  box-shadow:var(--shadow);touch-action:manipulation}
-.game-card::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .4s;
-  background:radial-gradient(circle at 50% 30%,rgba(255,255,255,.15) 0%,transparent 70%)}
-.game-card:focus{outline:3px solid var(--cyan);outline-offset:2px}
-.game-card:hover{transform:translateY(-4px) scale(1.02)}
-.game-card:active{transform:scale(.94)!important;border-color:var(--gold)}
-.game-card:active::before{opacity:1}
-.gc1{--glow:#ffd700} .gc2{--glow:#00d4ff} .gc3{--glow:#ff6eb4}
-.gc1::after,.gc2::after,.gc3::after{content:'';position:absolute;top:8px;right:8px;width:24px;height:24px;
-  background:var(--glow);border-radius:50%;opacity:.3;animation:pulseGlow 2s infinite}
-
-@keyframes pulseGlow{0%{opacity:.3;transform:scale(1)}50%{opacity:.6;transform:scale(1.4)}100%{opacity:.3;transform:scale(1)}}
-
-.card-icon{font-size:clamp(2.8rem,13vw,4rem);line-height:1;filter:drop-shadow(0 6px 16px rgba(0,0,0,.6));
-  animation:float3d 3s ease-in-out infinite}
-@keyframes float3d{0%,100%{transform:translateY(0) rotateX(0deg) rotateZ(-2deg)}50%{transform:translateY(-10px) rotateX(8deg) rotateZ(2deg)}}
-
-.card-name{font-family:var(--fh);font-size:clamp(1rem,4.5vw,1.3rem);text-align:center;line-height:1.25;font-weight:800}
-.card-desc{font-size:clamp(.75rem,3vw,.95rem);color:rgba(255,255,255,.6);text-align:center}
-.card-stars{font-size:clamp(1rem,4vw,1.2rem);letter-spacing:3px;color:var(--gold);margin-top:4px;font-weight:700}
-
-/* MOEDAS COM CONQUISTAS */
-.achievements{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:12px 0}
-.achievement{background:var(--glass);border:1.5px solid rgba(255,215,0,.3);border-radius:20px;
-  padding:6px 12px;font-size:clamp(.7rem,2.8vw,.85rem);font-family:var(--fh);color:var(--gold);
-  animation:achievementPop .6s cubic-bezier(.34,1.56,.64,1)}
-@keyframes achievementPop{0%{transform:scale(.5) rotate(-10deg);opacity:0}70%{transform:scale(1.05)}100%{transform:scale(1) rotate(0);opacity:1}}
-
-/* HEADER UNIFICADO */
-.hdr{display:flex;align-items:center;justify-content:space-between;width:100%;height:56px;
-  padding:0 clamp(12px,4vw,20px);background:var(--glass);backdrop-filter:blur(20px);
-  border-bottom:1px solid rgba(255,255,255,.08);flex-shrink:0;position:sticky;top:0;z-index:100}
-.hud{display:flex;gap:8px;align-items:center}
-.hbtn{background:var(--glass);border:2px solid rgba(255,255,255,.2);border-radius:14px;
-  width:44px;height:44px;display:flex;align-items:center;justify-content:center;
-  color:#fff;font-size:1.2rem;transition:all .15s cubic-bezier(.34,1.56,.64,1);
-  touch-action:manipulation}
-.hbtn:hover{background:rgba(255,255,255,.15)}
-.hbtn:active{transform:scale(.88);background:rgba(255,255,255,.25)}
-.pill{background:var(--glass);border:1.5px solid rgba(255,255,255,.15);border-radius:24px;
-  padding:4px 12px;font-family:var(--fh);font-size:clamp(.75rem,2.8vw,.9rem);font-weight:700;
-  white-space:nowrap;display:flex;align-items:center;gap:4px}
-
-/* PROGRESS BAR ANIMADA */
-.pbar-container{width:100%;height:10px;background:var(--glass);border-radius:12px;
-  overflow:hidden;margin:8px 0;flex-shrink:0}
-.pbar-fill{height:100%;border-radius:12px;background:var(--goldg);background-size:300% 100%;
-  animation:pbarShine 2.5s linear infinite;transition:width .8s cubic-bezier(.34,1.56,.64,1)}
-@keyframes pbarShine{0%{background-position:200% 0}100%{background-position:-200% 0}}
-
-/* BOTÕES RESPONSIVOS */
-.btn-primary{width:100%;background:var(--goldg);color:#1a0e00;border:none;border-radius:var(--r);
-  font-family:var(--fh);font-size:clamp(1.1rem,4.5vw,1.25rem);font-weight:800;
-  height:clamp(56px,15vw,72px);cursor:pointer;touch-action:manipulation;
-  box-shadow:0 8px 32px rgba(255,215,0,.4);transition:all .2s cubic-bezier(.34,1.56,.64,1)}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(255,215,0,.5)}
-.btn-primary:active{transform:scale(.96)}
-
-.btn-secondary{background:var(--glass);border:2px solid rgba(255,255,255,.25);border-radius:var(--r);
-  color:#fff;font-family:var(--fh);font-size:clamp(1rem,4vw,1.15rem);height:clamp(52px,14vw,68px);
-  transition:all .2s}
-
-/* TOAST NOTIFICAÇÕES */
-.toast{position:fixed;top:var(--sat);right:16px;z-index:10000;background:var(--card);
-  border:2px solid var(--gold);border-radius:var(--r2);padding:16px 20px;
-  font-family:var(--fh);font-size:1.1rem;color:var(--gold);transform:translateX(120%);
-  animation:toastSlide 4s cubic-bezier(.34,1.56,.64,1) forwards;box-shadow:var(--shadow)}
-@keyframes toastSlide{0%{transform:translateX(120%)}15%{transform:translateX(0)}85%{transform:translateX(0)}100%{transform:translateX(120%)}}
-
-/* CARREGAMENTO */
-.loading{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100dvh;
-  gap:24px;font-family:var(--fh);font-size:clamp(1.5rem,8vw,2.5rem);text-align:center}
-.spinner{display:inline-block;width:60px;height:60px;border:4px solid var(--glass);
-  border-top-color:var(--gold);border-radius:50%;animation:spin 1s linear infinite}
-@keyframes spin{content:' ';animation:spin 1s linear infinite}
-
-/* DARK MODE TOGGLE */
-.theme-toggle{position:fixed;top:var(--sat);left:16px;z-index:10000;background:var(--glass);
-  border:2px solid rgba(255,255,255,.2);border-radius:50%;width:48px;height:48px;
-  display:flex;align-items:center;justify-content:center;font-size:1.3rem;cursor:pointer;
-  transition:all .2s}
-.theme-toggle:active{transform:scale(.9)}
-
-.hidden{display:none!important}
-.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
-  clip:rect(0,0,0,0);white-space:nowrap;border:0}
-
-/* RESPONSIVO EXTREMO */
-@media (max-width:480px){.game-grid{grid-template-columns:1fr;gap:12px}}
-@media (max-height:500px){.menu-scroll{gap:12px;padding:16px 12px}}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-play-state:running!important}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0a1628">
+  <title>🌟 Mundo Mágico - Jogos Educativos</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-<!-- LOADING SCREEN -->
-<div class="loading screen on" id="sLoading" role="status" aria-live="polite">
-  <div class="spinner"></div>
-  <div>🌟 Carregando Mundo Mágico...</div>
-  <div style="font-size:.9rem;color:rgba(255,255,255,.6)">Preparando estrelas ✨</div>
-</div>
+  <!-- Loading -->
+  <div class="screen on" id="sLoading">
+    <div class="spinner"></div>
+    <div>🌟 Mundo Mágico</div>
+    <div>Carregando magia...</div>
+  </div>
 
-<!-- UNIVERSO -->
-<div id="universe">
-  <div class="aurora aurora1"></div>
-  <div class="aurora aurora2"></div>
-  <div class="tree-row"></div>
-</div>
+  <!-- Universo de fundo -->
+  <div id="universe"></div>
 
-<!-- CONTROLES GLOBAIS -->
-<button class="theme-toggle" id="themeToggle" title="Alternar tema noturno" aria-label="Alternar tema">🌙</button>
-
-<!-- MENU PRINCIPAL -->
-<div class="screen" id="sMenu" role="main">
-  <div class="menu-scroll">
-    <div class="logo-zone">
-      <span class="logo-moon" role="img" aria-label="Lua mágica">🌙</span>
-      <h1 class="logo-title">Mundo<br>Mágico</h1>
-      <div class="logo-stars" aria-hidden="true">
-        <span style="--orbit:2.2s;--delay:0s">✨</span>
-        <span style="--orbit:1.9s;--delay:-.5s">🌟</span>
-        <span style="--orbit:2.5s;--delay:-1s">⭐</span>
-        <span style="--orbit:2.1s;--delay:-1.5s">🌟</span>
-        <span style="--orbit:1.8s;--delay:-.3s">✨</span>
+  <!-- Menu Principal -->
+  <div class="screen" id="sMenu">
+    <div class="menu-scroll">
+      <div class="logo-zone">
+        <span class="logo-moon" aria-label="Lua mágica">🌙</span>
+        <h1 class="logo-title">Mundo<br>Mágico</h1>
+        <div class="logo-stars" aria-hidden="true">
+          <span>✨</span><span>🌟</span><span>⭐</span><span>🌟</span><span>✨</span>
+        </div>
+        <p class="logo-sub">Aprenda brincando! 🎉</p>
       </div>
-      <p class="logo-sub">Aprenda brincando! 🎉⭐  v2.0 Melhorada</p>
-    </div>
 
-    <div class="achievements" id="achievements" aria-live="polite"></div>
-    
-    <div class="game-grid" role="menu">
-      <button class="game-card gc1" id="btnAlpha" role="menuitem" tabindex="0"
-              aria-label="Jogo do Alfabeto - Encontre a letra inicial dos animais">
-        <div class="card-icon" aria-hidden="true">🔤</div>
-        <div class="card-name">Alfabeto<br>Mágico</div>
-        <div class="card-desc">Primeira letrinha dos animais!</div>
-        <div class="card-stars" id="starsAlpha" aria-label="Estrelas conquistadas">☆☆☆</div>
-      </button>
-      
-      <button class="game-card gc2" id="btnMemory" role="menuitem" tabindex="-1"
-              aria-label="Jogo da Memória - Encontre os pares de animais">
-        <div class="card-icon" aria-hidden="true">🧠</div>
-        <div class="card-name">Memória<br>Animal</div>
-        <div class="card-desc">Ache os pares iguais!</div>
-        <div class="card-stars" id="starsMemory" aria-label="Estrelas conquistadas">☆☆☆</div>
-      </button>
-      
-      <button class="game-card gc3" id="btnMaze" role="menuitem" tabindex="-1"
-              aria-label="Labirinto Mágico - Encontre a estrela dourada">
-        <div class="card-icon" aria-hidden="true">🌿</div>
-        <div class="card-name">Labirinto<br>Mágico</div>
-        <div class="card-desc">Saia do labirinto com dicas!</div>
-        <div class="card-stars" id="starsMaze" aria-label="Estrelas conquistadas">☆☆☆</div>
-      </button>
-    </div>
+      <div class="game-grid">
+        <button class="game-card gc1" id="btnAlpha" tabindex="0">
+          <div class="card-icon">🔤</div>
+          <div class="card-name">Alfabeto<br>Mágico</div>
+          <div class="card-desc">Primeira letra!</div>
+          <div class="card-stars" id="starsAlpha">☆☆☆</div>
+        </button>
+        <button class="game-card gc2" id="btnMemory" tabindex="-1">
+          <div class="card-icon">🧠</div>
+          <div class="card-name">Memória<br>Animal</div>
+          <div class="card-desc">Encontre os pares</div>
+          <div class="card-stars" id="starsMemory">☆☆☆</div>
+        </button>
+        <button class="game-card gc3" id="btnMaze" tabindex="-1">
+          <div class="card-icon">🌿</div>
+          <div class="card-name">Labirinto<br>Mágico</div>
+          <div class="card-desc">Ache a estrela!</div>
+          <div class="card-stars" id="starsMaze">☆☆☆</div>
+        </button>
+      </div>
 
-    <div style="display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;width:100%">
-      <div class="coins-display" style="background:var(--glass);border:2px solid rgba(255,215,0,.3);border-radius:50px;padding:12px 24px;">
-        <span aria-hidden="true">🪙</span>
-        <span id="totalCoins" style="font-family:var(--fh);font-weight:800;font-size:clamp(1.1rem,4.5vw,1.3rem);margin-left:8px;color:var(--gold)">0</span>
-        <span style="font-size:.9rem;color:rgba(255,255,255,.7)">moedas</span>
+      <div class="coins-row">
+        <span>🪙</span>
+        <span id="totalCoins">0</span> moedas
       </div>
     </div>
   </div>
-</div>
 
-<script>
-/** =======================================================
- *  MUNDO MÁGICO v2.0 - CÓDIGO OTIMIZADO E MELHORADO
- * ======================================================= */
+  <!-- Telas dos Jogos - Alpha, Memory, Maze, Resultado -->
+  <div class="screen" id="sAlpha"><!-- Conteúdo Alfabeto --></div>
+  <div class="screen" id="sMemory"><!-- Conteúdo Memória --></div>
+  <div class="screen" id="sMaze"><!-- Conteúdo Labirinto --></div>
+  <div class="screen" id="sResult"><!-- Tela Resultado --></div>
 
-// ESTADO GLOBAL MINIFICADO
-let coins=+(localStorage.getItem('mw_coins')||0),stars={a:0,m:0,z:0},currentGame='',achievements=[];
-
-// DADOS DOS JOGOS (MELHORADOS)
-const ALPHA_DATA=[{l:'A',e:'🍎',w:'ABACAXI'},{l:'B',e:'🎈',w:'BOLA'},{l:'C',e:'🐱',w:'GATO'},
-{l:'D',e:'🐶',w:'CACHORRO'},{l:'E',e:'⭐',w:'ESTRELA'},{l:'F',e:'🌸',w:'FLOR'},
-{l:'G',e:'🦒',w:'GIRAFA'},{l:'H',e:'🏠',w:'CASA'},{l:'I',e:'🌈',w:'ARCO-ÍRIS'},
-{l:'J',e:'🐞',w:'JOANINHA'},{l:'K',e:'🥝',w:'KIWI'},{l:'L',e:'🦁',w:'LEÃO'},
-{l:'M',e:'🐒',w:'MACACO'},{l:'N',e:'☁️',w:'NUVEM'},{l:'O',e:'🐻',w:'URSO'},
-{l:'P',e:'🦜',w:'PAPAGAIO'},{l:'Q',e:'🧀',w:'QUEIJO'},{l:'R',e:'🐸',w:'RÃ'},
-{l:'S',e:'🐍',w:'COBRA'},{l:'T',e:'🐢',w:'TARTARUGA'},{l:'U',e:'🍇',w:'UVA'},
-{l:'V',e:'🦋',w:'BORBOLETA'},{l:'W',e:'🌊',w:'ONDA'},{l:'X',e:'🎸',w:'VIOLÃO'},
-{l:'Y',e:'🧘',w:'YOGA'},{l:'Z',e:'🦓',w:'ZEBRA'}];
-
-const MEMORY_CARDS=[
-  {e:'🦁',s:'RAUUU!'},{e:'🐯',s:'RRRR!'},{e:'🐱',s:'MIAU!'},{e:'🐶',s:'AU AU!'},
-  {e:'🐴',s:'HIIII!'},{e:'🦄',s:'MAGIA!'},{e:'🐘',s:'BRRR!'},{e:'🦒',s:'OOH!'},
-  {e:'🐒',s:'UU-AA!'},{e:'🐸',s:'CROAC!'},{e:'🦋',s:'FLUTTER!'},{e:'🐧',s:'SQUAWK!'}];
-
-const MAZE_LEVELS=[{name:'🌿 Floresta Encantada',size:7,maxSteps:35},
-                  {name:'🏖️ Praia Mística',size:9,maxSteps:55},
-                  {name:'🏔️ Pico Celestial',size:11,maxSteps:80}];
-
-// UTILITÁRIOS OTIMIZADOS
-const $=id=>document.getElementById(id),qs=sel=>document.querySelector(sel),
-      qsa=sel=>document.querySelectorAll(sel);
-const shuffle=a=>[...a].sort(()=>Math.random()-.5),
-      clamp=(min,val,max)=>Math.max(min,Math.min(max,val)),
-      save=(k,v)=>localStorage.setItem('mw_'+k,v),
-      load=(k,d=0)=>+(localStorage.getItem('mw_'+k)||d),
-      starsUI=s=>'★'.repeat(s)+'☆'.repeat(3-s),
-      addCoins=n=>{coins+=n;save('coins',coins);$('totalCoins').textContent=coins;showToast(`+${n} moedas! 🪙`)},
-      showScreen=id=>{qsa('.screen').forEach(s=>s.classList.remove('on'));$(id)?.classList.add('on')},
-      showToast=msg=>{const t=document.createElement('div');t.className='toast';t.textContent=msg;
-        document.body.appendChild(t);setTimeout(()=>t.remove(),4000)};
-
-// CONFETTI OTIMIZADO
-const confetti=(count=40)=>{for(let i=0;i<count;i++){const s=document.createElement('span');
-  s.style.cssText=`position:fixed;z-index:9999;top:-50px;left:${Math.random()*100}vw;
-    font-size:${12+Math.random()*16}px;animation:cFall ${1+Math.random()}s linear forwards;
-    animation-delay:${Math.random()*.5}s;pointer-events:none`;
-  s.textContent=['⭐','🌟','✨','🎉','💫','🪙'][Math.floor(Math.random()*6)];
-  document.body.appendChild(s);s.addEventListener('animationend',()=>s.remove(),{once:true});
-}};
-
-// INICIALIZAÇÃO RÁPIDA
-document.addEventListener('DOMContentLoaded',()=>{
-  // Carrega estrelas
-  stars.a=load('stars_a',0);stars.m=load('stars_m',0);stars.z=load('stars_z',0);
-  $('starsAlpha').textContent=starsUI(stars.a);
-  $('starsMemory').textContent=starsUI(stars.m);
-  $('starsMaze').textContent=starsUI(stars.z);
-  $('totalCoins').textContent=coins;
-  
-  // Gera estrelas otimizadas
-  const u=$('universe');
-  for(let i=0;i<120;i++){const star=document.createElement('div');
-    star.className='star';star.style.cssText=`width:${.5+Math.random()*3}px;height:${.5+Math.random()*3}px;
-      top:${Math.random()*95}vh;left:${Math.random()*100}vw;animation-delay:${~~(Math.random()*6)}s;
-      animation-duration:${2+Math.random()*4}s`;
-    u.appendChild(star);
-  }
-  
-  // Event listeners dos jogos
-  $('btnAlpha').onclick=()=>showScreen('sAlpha');
-  $('btnMemory').onclick=()=>showScreen('sMemory');
-  $('btnMaze').onclick=()=>showScreen('sMaze');
-  
-  // Navegação por teclado
-  document.addEventListener('keydown',e=>{
-    if(e.target.closest('.screen'))return;
-    if(e.key==='1')showScreen('sAlpha');
-    if(e.key==='2')showScreen('sMemory');
-    if(e.key==='3')showScreen('sMaze');
-    if(e.key==='Escape')showScreen('sMenu');
-  });
-  
-  // Foco visível nos cards
-  qsa('.game-card').forEach((card,i)=>card.setAttribute('tabindex',i===0?0:-1));
-  
-  // Transição do loading
-  setTimeout(()=>{
-    $('sLoading').classList.remove('on');
-    showScreen('sMenu');
-    confetti(25);
-  },1200);
-  
-  // PWA - Service Worker
-  if('serviceWorker' in navigator)navigator.serviceWorker.register('/sw.js');
-});
-
-// CONTROLES GLOBAIS
-$('themeToggle')?.addEventListener('click',()=>{
-  document.body.classList.toggle('night-mode');
-  $('themeToggle').textContent=document.body.classList.contains('night-mode')?'☀️':'🌙';
-});
-
-// FIM DO CÓDIGO - PRONTO PARA USO!
-</script>
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>
