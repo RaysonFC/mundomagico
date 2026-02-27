@@ -1,0 +1,13 @@
+{
+  "name": "mundo-magico",
+  "version": "2.0.0",
+  "description": "Jogo educativo infantil com 3 mini-games mágicos",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve .",
+    "build": "echo 'Build completo!'"
+  },
+  "keywords": ["jogo", "educativo", "criancas", "html5", "pwa"],
+  "author": "Desenvolvedor Brasileiro",
+  "license": "MIT"
+}
