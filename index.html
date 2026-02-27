@@ -13,13 +13,17 @@
   <div class="screen on" id="sLoading">
     <div class="spinner"></div>
     <div>🌟 Mundo Mágico</div>
-    <div>Carregando magia...</div>
+    <p>Carregando magia...</p>
   </div>
 
-  <!-- Universo de fundo -->
-  <div id="universe"></div>
+  <!-- Universo -->
+  <div id="universe">
+    <div class="aurora aurora1"></div>
+    <div class="aurora aurora2"></div>
+    <div class="tree-row"></div>
+  </div>
 
-  <!-- Menu Principal -->
+  <!-- MENU PRINCIPAL -->
   <div class="screen" id="sMenu">
     <div class="menu-scroll">
       <div class="logo-zone">
@@ -54,16 +58,38 @@
 
       <div class="coins-row">
         <span>🪙</span>
-        <span id="totalCoins">0</span> moedas
+        <span id="totalCoins">0</span> <span>moedas</span>
       </div>
     </div>
   </div>
 
-  <!-- Telas dos Jogos - Alpha, Memory, Maze, Resultado -->
-  <div class="screen" id="sAlpha"><!-- Conteúdo Alfabeto --></div>
-  <div class="screen" id="sMemory"><!-- Conteúdo Memória --></div>
-  <div class="screen" id="sMaze"><!-- Conteúdo Labirinto --></div>
-  <div class="screen" id="sResult"><!-- Tela Resultado --></div>
+  <!-- ALFABETO -->
+  <div class="screen" id="sAlpha">
+    <div class="hdr">
+      <button class="hbtn" onclick="showScreen('sMenu')">🏠</button>
+      <div class="hud">
+        <div class="pill">⭐ <span id="aScore">0</span></div>
+        <div class="pill"><span id="aLives">❤️❤️❤️</span></div>
+        <div class="pill">🔤 <span id="aCur">1</span>/<span id="aTotal">10</span></div>
+      </div>
+      <button class="hbtn" onclick="initAlpha()">🔄</button>
+    </div>
+    <div class="alpha-body">
+      <div class="pbar-wrap"><div class="pbar-fill" id="aProgress"></div></div>
+      <div class="acard">
+        <span class="aemoji" id="aEmoji"></span>
+        <div class="aword" id="aWord"></div>
+        <div class="ahint" id="aHint"></div>
+      </div>
+      <div class="aquestion">Qual é a primeira letrinha?</div>
+      <div class="aopts" id="aOpts"></div>
+    </div>
+  </div>
+
+  <!-- MEMÓRIA + MAZE + RESULTADO (telas similares) -->
+  <div class="screen" id="sMemory"><!-- Implementado no memory.js --></div>
+  <div class="screen" id="sMaze"><!-- Implementado no maze.js --></div>
+  <div class="screen" id="sResult"><!-- Tela de resultado --></div>
 
   <script type="module" src="js/main.js"></script>
 </body>
